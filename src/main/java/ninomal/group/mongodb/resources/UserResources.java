@@ -1,6 +1,8 @@
 package ninomal.group.mongodb.resources;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ninomal.group.mongodb.domain.User;
+import ninomal.group.mongodb.dto.UserDto;
 import ninomal.group.mongodb.service.UserService;
 
 @RestController
@@ -19,8 +22,9 @@ public class UserResources {
 	private UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> list = service.findAll();	
-		return ResponseEntity.ok().body(list);
+	public ResponseEntity<List<UserDto>> findAll(){
+		List<User> list = service.findAll();
+		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 }
