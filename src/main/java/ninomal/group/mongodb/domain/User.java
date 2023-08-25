@@ -3,27 +3,32 @@ package ninomal.group.mongodb.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="users")
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	@Id
+	private String id;
 	private String email;
 	private String name;
 	
 	public User() {
 	}
 
-	public User(Integer id, String email, String name) {
+	public User(String id, String email, String name) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
