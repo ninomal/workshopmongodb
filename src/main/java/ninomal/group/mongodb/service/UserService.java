@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ninomal.group.mongodb.domain.User;
+import ninomal.group.mongodb.dto.UserDto;
 import ninomal.group.mongodb.repository.UserRepository;
 import ninomal.group.mongodb.service.exception.ObjectNotFoundException;
 
@@ -24,6 +25,13 @@ public class UserService {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("id not found"));
 		}
+	
+	public User insert(User obj) {
+		return repo.insert(obj);
+	}
 
-
+	public User fromDto(UserDto objDto) {
+		return new User(objDto.getId(), objDto.getEmail(), objDto.getName());
+	}
+	
 }
