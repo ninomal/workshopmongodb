@@ -38,6 +38,9 @@ public class Instantiaton implements CommandLineRunner {
 		Post post1 = new Post(null, new AuthorDto(maria), "indo viagem para italia", sdf.parse("10/06/2000"), "Vou viajar");
 		Post post2 = new Post(null, new AuthorDto(alex), "nem li", sdf.parse("10/08/2022"), "recados");
 		postRepo.saveAll(Arrays.asList(post1, post2));
+		
+		maria.getPost().addAll(Arrays.asList(post1));
+		userRepository.save(maria);
 	}
 
 	
