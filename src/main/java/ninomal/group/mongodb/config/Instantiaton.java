@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import ninomal.group.mongodb.domain.Post;
 import ninomal.group.mongodb.domain.User;
+import ninomal.group.mongodb.dto.AuthorDto;
 import ninomal.group.mongodb.repository.PostRepository;
 import ninomal.group.mongodb.repository.UserRepository;
 
@@ -29,13 +30,13 @@ public class Instantiaton implements CommandLineRunner {
 		userRepository.deleteAll();
 		postRepo.deleteAll();
 		
-		User maria = new User(null, "Maria Brown", "maria@gmail.com");
-		User alex = new User(null, "Alex Green", "alex@gmail.com");
-		User bob = new User(null, "Bob Grey", "bob@gmail.com");
+		User maria = new User(null, "maria@gmail.com", "Maria Brown");
+		User alex = new User(null,"alex@gmail.com", "Alex Green");
+		User bob = new User(null, "bob@gmail.com", "Bob Grey");
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
 		
-		Post post1 = new Post(null,maria, "indo viagem para italia", sdf.parse("10/06/2000"), "Vou viajar");
-		Post post2 = new Post(null, alex, "nem li", sdf.parse("10/08/2022"), "recados");
+		Post post1 = new Post(null, new AuthorDto(maria), "indo viagem para italia", sdf.parse("10/06/2000"), "Vou viajar");
+		Post post2 = new Post(null, new AuthorDto(alex), "nem li", sdf.parse("10/08/2022"), "recados");
 		postRepo.saveAll(Arrays.asList(post1, post2));
 	}
 
