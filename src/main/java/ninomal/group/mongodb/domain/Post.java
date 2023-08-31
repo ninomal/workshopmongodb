@@ -1,24 +1,29 @@
 package ninomal.group.mongodb.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import ninomal.group.mongodb.dto.AuthorDto;
+import ninomal.group.mongodb.dto.CommentDto;
 
 @Document
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	String id;
-	String body;
-	Date date;
-	String title;
-	AuthorDto author;
+	private String id;
+	private String body;
+	private Date date;
+	private String title;
+	private AuthorDto author;
+	
+	private List<CommentDto> comment = new ArrayList<>();
 	
 	public Post() {
 	}
@@ -72,9 +77,14 @@ public class Post implements Serializable {
 		this.title = title;
 	}
 
-	
-	
-	
+	public List<CommentDto> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<CommentDto> comment) {
+		this.comment = comment;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
