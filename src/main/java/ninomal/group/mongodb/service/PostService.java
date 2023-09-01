@@ -28,7 +28,7 @@ public class PostService {
 	}
 	
 	public List<Post> fullSearch(String text, Date minDate, Date maxDate){
-		maxDate = new Date(maxDate.getTime() * 60 * 60 *1000);
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 *1000);
 		return post.findAllTitle(text, minDate, maxDate);
 		
 	}
