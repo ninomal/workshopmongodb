@@ -1,5 +1,6 @@
 package ninomal.group.mongodb.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,16 @@ public class PostResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	
+	@GetMapping(value= "/searchall")
+	public ResponseEntity<List<Post>> findByAll(
+			@RequestParam(value = "text", defaultValue = "") String text,
+			@RequestParam(value = "minDate", defaultValue = "") String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "") String maxDate){
+		text = URL.decoparam(text);
+		Date minD = URL.convertDate(minDate, new Date(0l));
+		Date mAx = URL.convertDate(maxDate, new Date());
+		List<Post> list = post.fullSearch(text, minD, mAx);
+		return ResponseEntity.ok().body(list);
+	}
 	
 }
